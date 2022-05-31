@@ -26,14 +26,16 @@ function Todo() {
     { key: getKey(), text: '明日の準備をする', done: false },
     /* テストコード 終了 */
   ]);
-
+  const onClickItem = (e,i)=>{
+  
+  }
   return (
     <div className="panel">
       <div className="panel-heading">
         ITSS ToDoアプリ
       </div>
       {items.map(item => (
-        <TodoItem key={item.key} item={item}></TodoItem>
+        <TodoItem key={item.key} item={item} onClickItem={onClickItem}></TodoItem>
       ))}
       <div className="panel-block">
         {items.length} items

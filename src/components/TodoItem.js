@@ -4,11 +4,16 @@
 　・チェックボックスにチェックが入っているか管理する
 　・チェックボックスにチェックが入っているかアイテムをグレーアウトする
 */
-function TodoItem( {item}  ) {
+import {useState} from 'react';
+function TodoItem( {item,onClickItem}  ) {
+  const [isActive, setIsActive] = useState(false);
+  const handleClick = () => {
+    setIsActive(!isActive);
+  };
   return (
     <label className="panel-block">
-      <input type="checkbox"></input>
-      {item.text}
+      <input onClick={handleClick} type="checkbox"/>
+      <span className={isActive?'has-text-grey-light':''}>{item.text}</span>
     </label>
   );
 }
