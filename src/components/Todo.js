@@ -26,6 +26,7 @@ function Todo() {
     { key: getKey(), text: '明日の準備をする', done: false },
     /* テストコード 終了 */
   ]);
+  //const [items, putItems, clearItems] = useStorage();
   const handleCheck = checked => {
     const newItems = items.map(item => {
       if (item.key === checked.key) {
@@ -57,15 +58,16 @@ function Todo() {
         onChange={handleFilterChange}
         value={filter}
       />
-      {items.map(item => (
-        <TodoItem 
-        key = {item.key} 
-        item = {item}
-        onCheck={handleCheck}/>
+      {displayItems.map(item => (
+        <TodoItem
+          key={item.key}
+          item={item}
+          onCheck={handleCheck}
+        />
       ))}
       <div className="panel-block">
         {items.length} items
-      </div>
+        </div>
     </div>
   );
 }
