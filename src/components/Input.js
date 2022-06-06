@@ -8,6 +8,7 @@ function Input(  ) {
 
   return (
     <div className="panel-block">
+      <input class="input" type="text"/>
     </div>
   );
 }
