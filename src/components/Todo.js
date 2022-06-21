@@ -13,7 +13,7 @@ import Input from './Input';
 import Filter from './Filter';
 
 /* カスタムフック */
-import useStorage from '../hooks/storage';
+import useFirestore from '../hooks/useFireStore';
 
 /* ライブラリ */
 import {getKey} from "../lib/util";
@@ -26,18 +26,12 @@ function Todo() {
   //   { key: getKey(), text: '明日の準備をする', done: false },
   //   /* テストコード 終了 */
   // ]);
-  const [items, putItems, clearItems] = useStorage();
+  const [items, addItem, updateItem, clearItems] = useFirestore();
   const handleCheck = checked => {
-    const newItems = items.map(item => {
-      if (item.key === checked.key) {
-        item.done = !item.done;
-      }
-      return item;
-    });
-    putItems(newItems);
+    updateItem(checked);
   };
   const handleAdd = text => {
-    putItems([...items, {key: getKey(), text, done:false}]);
+    addItem({ text, done: false });
   };
 
   const [filter, setFilter] = React.useState('ALL');
@@ -60,7 +54,7 @@ function Todo() {
       />
       {displayItems.map(item => (
         <TodoItem
-          key={item.key}
+          key={item.id}
           item={item}
           onCheck={handleCheck}
         />
